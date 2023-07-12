@@ -1,0 +1,16 @@
+C:\Users\msi\source\repos\Tying_test\Tying_test\bin\Debug\Tying_test.exe.config
+C:\Users\msi\source\repos\Tying_test\Tying_test\bin\Debug\Tying_test.exe
+C:\Users\msi\source\repos\Tying_test\Tying_test\bin\Debug\Tying_test.pdb
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.csproj.AssemblyReference.cache
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.csproj.SuggestedBindingRedirects.cache
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\MainWindow.g.cs
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\App.g.cs
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test_MarkupCompile.cache
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test_MarkupCompile.lref
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\MainWindow.baml
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.g.resources
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.Properties.Resources.resources
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.csproj.GenerateResource.cache
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.csproj.CoreCompileInputs.cache
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.exe
+C:\Users\msi\source\repos\Tying_test\Tying_test\obj\Debug\Tying_test.pdb
