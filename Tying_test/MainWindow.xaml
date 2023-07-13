@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="Typing test" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.648,0.666">
-        <TextBox x:Name="textboxForUserToDropTextIn" HorizontalAlignment="Center" Margin="0,269,0,0" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1" />
-        <Button x:Name="btnGenerateTypingTest" Content="Send text" HorizontalAlignment="Left" Margin="566,287,0,0" VerticalAlignment="Top" Click="SendText" />
-        <TextBox x:Name="typingTest" Visibility="Collapsed" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.467,-0.944" />
+        <TextBox x:Name="textboxForUserToDropTextIn" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="188" TextChanged="TextBox_TextChanged_1" Height="73" Margin="0,266,0,0" />
+        <Button x:Name="btnGenerateTypingTest" Content="Send text" HorizontalAlignment="Center" Margin="0,344,0,0" VerticalAlignment="Top" Click="SendText" Height="59" Width="146" RenderTransformOrigin="0.507,0.204" />
+        <TextBox x:Name="typingTestText" Visibility="Visible" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="780" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" Margin="0,7,0,0" Height="254" Opacity="0.5" />
+        <TextBox x:Name="typingTest" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="780" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" Margin="0,7,0,0" Height="254" AllowDrop="True" Background="{x:Null}" Panel.ZIndex="1" />
     </Grid>
 </Window>

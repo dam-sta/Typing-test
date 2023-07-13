@@ -45,25 +45,29 @@ namespace Tying_test
                 }
                 else
                 {
-                    typingTest.Text = textboxForUserToDropTextIn.Text;
+                    typingTestText.Text = textboxForUserToDropTextIn.Text;
                     textboxForUserToDropTextIn.Text = "";
                     textboxForUserToDropTextIn.Visibility = Visibility.Collapsed;
                     btnGenerateTypingTest.Content = "Stop the typing test";
                     btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
                     btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
                     btnGenerateTypingTest.Margin = new Thickness(0);
+                    typingTestText.Visibility = Visibility.Visible;
                     typingTest.Visibility = Visibility.Visible;
+
                 }
             }
             else
             {
                 btnGenerateTypingTest.Content = "Send text";
-                textboxForUserToDropTextIn.Text = typingTest.Text;
+                textboxForUserToDropTextIn.Text = typingTestText.Text;
+                typingTestText.Text = "";
                 typingTest.Text = "";
                 textboxForUserToDropTextIn.Visibility = Visibility.Visible;
                 btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
                 btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
                 btnGenerateTypingTest.Margin = new Thickness(0);
+                typingTestText.Visibility = Visibility.Collapsed;
                 typingTest.Visibility = Visibility.Collapsed;
             }
 
