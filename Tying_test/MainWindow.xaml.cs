@@ -37,14 +37,34 @@ namespace Tying_test
 
         private void SendText(object sender, RoutedEventArgs e)
         {
-            if (textboxForUserToDropTextIn.Text.Length == 0)
+            if ((string)btnGenerateTypingTest.Content == "Send text")
             {
-                MessageBox.Show("Type something");
-            } 
+                if (string.IsNullOrEmpty(textboxForUserToDropTextIn.Text))
+                {
+                    MessageBox.Show("Type something");
+                }
+                else
+                {
+                    typingTest.Text = textboxForUserToDropTextIn.Text;
+                    textboxForUserToDropTextIn.Text = "";
+                    textboxForUserToDropTextIn.Visibility = Visibility.Collapsed;
+                    btnGenerateTypingTest.Content = "Stop the typing test";
+                    btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
+                    btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
+                    btnGenerateTypingTest.Margin = new Thickness(0);
+                    typingTest.Visibility = Visibility.Visible;
+                }
+            }
             else
             {
-                typingTest.Text = textboxForUserToDropTextIn.Text;
-                textboxForUserToDropTextIn.Text = ""; 
+                btnGenerateTypingTest.Content = "Send text";
+                textboxForUserToDropTextIn.Text = typingTest.Text;
+                typingTest.Text = "";
+                textboxForUserToDropTextIn.Visibility = Visibility.Visible;
+                btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
+                btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
+                btnGenerateTypingTest.Margin = new Thickness(0);
+                typingTest.Visibility = Visibility.Collapsed;
             }
 
         }

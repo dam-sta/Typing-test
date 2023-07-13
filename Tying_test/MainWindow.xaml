@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Typing test" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.648,0.666">
-        <TextBox x:Name="textboxForUserToDropTextIn" HorizontalAlignment="Center" Margin="0,269,0,0" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
-        <Button x:Name="btnGenerateTypingTest" Content="Send text" HorizontalAlignment="Left" Margin="566,287,0,0" VerticalAlignment="Top" Click="SendText"/>
-        <TextBox x:Name="typingTest" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.467,-0.944"/>
+        <TextBox x:Name="textboxForUserToDropTextIn" HorizontalAlignment="Center" Margin="0,269,0,0" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1" />
+        <Button x:Name="btnGenerateTypingTest" Content="Send text" HorizontalAlignment="Left" Margin="566,287,0,0" VerticalAlignment="Top" Click="SendText" />
+        <TextBox x:Name="typingTest" Visibility="Collapsed" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.467,-0.944" />
     </Grid>
 </Window>
