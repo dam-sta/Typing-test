@@ -72,5 +72,42 @@ namespace Tying_test
             }
 
         }
+
+        private void TypingTestTypedCharacter(object sender, KeyEventArgs e)
+        {
+            string lastChar = "";
+            string typingVerification = "";
+            string textSoFarVerification = typingTestText.Text.Substring(0, typingTest.Text.Length);
+            var isLengthZero = typingTest.Text.Length > 0;
+
+            if (typingTestText.Text.Length == typingTest.Text.Length && typingTest.Text == textSoFarVerification)
+            {
+                SendText(sender, e);
+                return;
+            }
+
+            if (isLengthZero)
+            {
+                lastChar = typingTest.Text.Substring(typingTest.Text.Length - 1);
+                typingVerification = typingTestText.Text.Substring(typingTest.Text.Length - 1, 1);
+            }
+
+            if (lastChar != typingVerification && isLengthZero || typingTest.Text != textSoFarVerification && isLengthZero)
+            {
+                typingTest.Foreground = Brushes.Red;
+            }
+            else if (isLengthZero)
+            {
+                typingTest.Foreground = Brushes.Green;
+            }
+        }
+
+        private void EnterButton(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SendText(sender, e);
+            }
+        }
     }
 }
