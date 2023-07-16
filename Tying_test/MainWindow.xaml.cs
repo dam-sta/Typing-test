@@ -54,7 +54,7 @@ namespace Tying_test
                     btnGenerateTypingTest.Margin = new Thickness(0);
                     typingTestText.Visibility = Visibility.Visible;
                     typingTest.Visibility = Visibility.Visible;
-
+                    typingTest.Focus();
                 }
             }
             else

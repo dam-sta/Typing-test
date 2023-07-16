@@ -8,9 +8,13 @@
         Title="Typing test" 
         WindowState="Maximized" Height="427">
     <Grid RenderTransformOrigin="0.648,0.666">
-        <TextBox x:Name="textboxForUserToDropTextIn" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="188" TextChanged="TextBox_TextChanged_1" Height="73" Margin="0,266,0,0" KeyDown="EnterButton" />
-        <Button x:Name="btnGenerateTypingTest" Content="Send text" HorizontalAlignment="Center" Margin="0,344,0,0" VerticalAlignment="Bottom" Click="SendText" Height="59" Width="146" RenderTransformOrigin="0.507,0.204" />
-        <TextBox x:Name="typingTestText" Visibility="Visible" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Top" Width="780" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" Margin="0,7,0,0" Height="254" Opacity="0.5" Panel.ZIndex="-1" />
-        <TextBox x:Name="typingTest" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="780" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" Margin="0,7,0,0" Height="254" AllowDrop="True" Panel.ZIndex="1" Background="{x:Null}" KeyUp="TypingTestTypedCharacter" KeyDown="AllowKeyPress" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="textboxForUserToDropTextIn" Grid.Row="1" TextWrapping="Wrap" Text="Hello" TextChanged="TextBox_TextChanged_1" KeyDown="EnterButton" />
+        <Button x:Name="btnGenerateTypingTest" Grid.Row="1" Content="Send text" Panel.ZIndex="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SendText" Width="146" RenderTransformOrigin="0.507,0.204" />
+        <TextBox x:Name="typingTestText" Grid.Row="0"  Visibility="Visible" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Hello" VerticalAlignment="Stretch" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" Opacity="0.5" Panel.ZIndex="-1" />
+        <TextBox x:Name="typingTest" Grid.Row="0" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch"  TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.358,-1.559" AllowDrop="True" Panel.ZIndex="1" Background="{x:Null}" KeyUp="TypingTestTypedCharacter" KeyDown="AllowKeyPress" />
     </Grid>
 </Window>
