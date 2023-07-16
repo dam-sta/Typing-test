@@ -109,5 +109,13 @@ namespace Tying_test
                 SendText(sender, e);
             }
         }
+
+        private void AllowKeyPress(object sender, KeyEventArgs e)
+        {
+            if (typingTest.Text.Length == typingTestText.Text.Length && e.Key != Key.Back)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
