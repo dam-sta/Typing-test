@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +22,7 @@ namespace Tying_test
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Stopwatch stopwatch = new Stopwatch();
         public MainWindow()
         {
             InitializeComponent();
@@ -37,52 +40,51 @@ namespace Tying_test
 
         private void SendText(object sender, RoutedEventArgs e)
         {
-            if ((string)btnGenerateTypingTest.Content == "Send text")
+            if (string.IsNullOrEmpty(textboxForUserToDropTextIn.Text))
             {
-                if (string.IsNullOrEmpty(textboxForUserToDropTextIn.Text))
-                {
-                    MessageBox.Show("Type something");
-                }
-                else
-                {
-                    typingTestText.Text = textboxForUserToDropTextIn.Text;
-                    textboxForUserToDropTextIn.Text = "";
-                    textboxForUserToDropTextIn.Visibility = Visibility.Collapsed;
-                    btnGenerateTypingTest.Content = "Stop the typing test";
-                    btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
-                    btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
-                    btnGenerateTypingTest.Margin = new Thickness(0);
-                    typingTestText.Visibility = Visibility.Visible;
-                    typingTest.Visibility = Visibility.Visible;
-                    typingTest.Focus();
-                }
+                MessageBox.Show("Type something");
             }
             else
             {
-                btnGenerateTypingTest.Content = "Send text";
-                textboxForUserToDropTextIn.Text = typingTestText.Text;
-                typingTestText.Text = "";
-                typingTest.Text = "";
-                textboxForUserToDropTextIn.Visibility = Visibility.Visible;
-                btnGenerateTypingTest.VerticalAlignment = VerticalAlignment.Bottom;
-                btnGenerateTypingTest.HorizontalAlignment = HorizontalAlignment.Center;
-                btnGenerateTypingTest.Margin = new Thickness(0);
-                typingTestText.Visibility = Visibility.Collapsed;
-                typingTest.Visibility = Visibility.Collapsed;
+                string trimmedText = string.Join("\n", textboxForUserToDropTextIn.Text.Split('\n').Select(s => s.Trim()));
+                typingTestText.Text = trimmedText;
+                textboxForUserToDropTextIn.Text = "";
+                textboxForUserToDropTextIn.Visibility = Visibility.Collapsed;
+                btnGenerateTypingTest.Content = "Stop the typing test";
+                typingTestText.Visibility = Visibility.Visible;
+                typingTest.Visibility = Visibility.Visible;
+                btnGenerateTypingTest.Visibility = Visibility.Collapsed;
+                btnStopWritingTest.Visibility = Visibility.Visible;
+                typingTest.Focus();
+                stopwatch.Start();
             }
-
         }
 
         private void TypingTestTypedCharacter(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Enter)
+            {
+                typingTest.Text = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.TrimEnd()));
+            }
+
             string lastChar = "";
             string typingVerification = "";
+            // fix enter on typingTest
             string textSoFarVerification = typingTestText.Text.Substring(0, typingTest.Text.Length);
             var isLengthZero = typingTest.Text.Length > 0;
 
+            btnStopWritingTest.Content = typingTest.Text.Length.ToString();
+            btnStopWritingTest.Content += " " + typingTestText.Text.Length.ToString();
+
+
             if (typingTestText.Text.Length == typingTest.Text.Length && typingTest.Text == textSoFarVerification)
             {
-                SendText(sender, e);
+                stopwatch.Stop();
+                TimeSpan ts = stopwatch.Elapsed;
+                string elapsedTime = String.Format("{00}", ts.Seconds);
+                MessageBox.Show($"You were typing for: {elapsedTime} seconds");
+                stopwatch.Restart();
+                StopTypingTest(sender, e);
                 return;
             }
 
@@ -102,20 +104,34 @@ namespace Tying_test
             }
         }
 
-        private void EnterButton(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                SendText(sender, e);
-            }
-        }
-
         private void AllowKeyPress(object sender, KeyEventArgs e)
         {
             if (typingTest.Text.Length == typingTestText.Text.Length && e.Key != Key.Back)
             {
                 e.Handled = true;
             }
+            else if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.V)
+                {
+                    e.Handled = true;
+                    btnGenerateTypingTest.Content = "hi";
+
+                }
+            }
+        }
+
+        private void StopTypingTest(object sender, RoutedEventArgs e)
+        {
+            btnGenerateTypingTest.Content = "Send text";
+            textboxForUserToDropTextIn.Text = typingTestText.Text;
+            typingTestText.Text = "";
+            typingTest.Text = "";
+            textboxForUserToDropTextIn.Visibility = Visibility.Visible;
+            typingTestText.Visibility = Visibility.Collapsed;
+            typingTest.Visibility = Visibility.Collapsed;
+            btnGenerateTypingTest.Visibility = Visibility.Visible;
+            btnStopWritingTest.Visibility = Visibility.Collapsed;
         }
     }
 }
