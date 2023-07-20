@@ -62,22 +62,19 @@ namespace Tying_test
 
         private void TypingTestTypedCharacter(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                typingTest.Text = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.TrimEnd()));
-            }
+            /* if (e.Key == Key.Enter)
+             {
+                 typingTest.Text = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.TrimEnd()));
+             }*/
 
             string lastChar = "";
             string typingVerification = "";
-            // fix enter on typingTest
-            string textSoFarVerification = typingTestText.Text.Substring(0, typingTest.Text.Length);
+            string textSoFar = "";
             var isLengthZero = typingTest.Text.Length > 0;
 
-            btnStopWritingTest.Content = typingTest.Text.Length.ToString();
-            btnStopWritingTest.Content += " " + typingTestText.Text.Length.ToString();
 
 
-            if (typingTestText.Text.Length == typingTest.Text.Length && typingTest.Text == textSoFarVerification)
+            if (typingTest.Text == typingTestText.Text)
             {
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -90,11 +87,10 @@ namespace Tying_test
 
             if (isLengthZero)
             {
-                lastChar = typingTest.Text.Substring(typingTest.Text.Length - 1);
-                typingVerification = typingTestText.Text.Substring(typingTest.Text.Length - 1, 1);
+                textSoFar = typingTestText.Text.Substring(0, typingTest.Text.Trim().Length);
             }
 
-            if (lastChar != typingVerification && isLengthZero || typingTest.Text != textSoFarVerification && isLengthZero)
+            if (typingTest.Text.Trim() != textSoFar && isLengthZero)
             {
                 typingTest.Foreground = Brushes.Red;
             }
