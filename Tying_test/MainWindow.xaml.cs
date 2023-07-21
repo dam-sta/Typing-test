@@ -62,19 +62,13 @@ namespace Tying_test
 
         private void TypingTestTypedCharacter(object sender, KeyEventArgs e)
         {
-            /* if (e.Key == Key.Enter)
-             {
-                 typingTest.Text = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.TrimEnd()));
-             }*/
-
-            string lastChar = "";
-            string typingVerification = "";
             string textSoFar = "";
             var isLengthZero = typingTest.Text.Length > 0;
+            string trimmedTypingTest = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.Trim()));
 
 
 
-            if (typingTest.Text == typingTestText.Text)
+            if (trimmedTypingTest == typingTestText.Text)
             {
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -87,10 +81,13 @@ namespace Tying_test
 
             if (isLengthZero)
             {
-                textSoFar = typingTestText.Text.Substring(0, typingTest.Text.Trim().Length);
+                textSoFar = typingTestText.Text.Substring(0, trimmedTypingTest.Length);
             }
 
-            if (typingTest.Text.Trim() != textSoFar && isLengthZero)
+            btnStopWritingTest.Content = trimmedTypingTest.Length;
+            btnStopWritingTest.Content += " " + typingTestText.Text.Length;
+
+            if (trimmedTypingTest != textSoFar && isLengthZero)
             {
                 typingTest.Foreground = Brushes.Red;
             }
@@ -102,7 +99,9 @@ namespace Tying_test
 
         private void AllowKeyPress(object sender, KeyEventArgs e)
         {
-            if (typingTest.Text.Length == typingTestText.Text.Length && e.Key != Key.Back)
+            string trimmedTypingTest = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.Trim()));
+
+            if (trimmedTypingTest.Length == typingTestText.Text.Length && e.Key != Key.Back)
             {
                 e.Handled = true;
             }
