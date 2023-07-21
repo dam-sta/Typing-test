@@ -46,7 +46,7 @@ namespace Tying_test
             }
             else
             {
-                string trimmedText = string.Join("\n", textboxForUserToDropTextIn.Text.Split('\n').Select(s => s.Trim()));
+                string trimmedText = string.Join("\r\n", textboxForUserToDropTextIn.Text.Split('\n').Select(s => s.Trim()));
                 typingTestText.Text = trimmedText;
                 textboxForUserToDropTextIn.Text = "";
                 textboxForUserToDropTextIn.Visibility = Visibility.Collapsed;
@@ -62,13 +62,15 @@ namespace Tying_test
 
         private void TypingTestTypedCharacter(object sender, KeyEventArgs e)
         {
+            if (typingTest.Text.Length > typingTestText.Text.Length)
+            {
+                return;
+            }
+
             string textSoFar = "";
             var isLengthZero = typingTest.Text.Length > 0;
-            string trimmedTypingTest = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.Trim()));
 
-
-
-            if (trimmedTypingTest == typingTestText.Text)
+            if (typingTest.Text == typingTestText.Text)
             {
                 stopwatch.Stop();
                 TimeSpan ts = stopwatch.Elapsed;
@@ -81,13 +83,10 @@ namespace Tying_test
 
             if (isLengthZero)
             {
-                textSoFar = typingTestText.Text.Substring(0, trimmedTypingTest.Length);
+                textSoFar = typingTestText.Text.Substring(0, typingTest.Text.Length);
             }
 
-            btnStopWritingTest.Content = trimmedTypingTest.Length;
-            btnStopWritingTest.Content += " " + typingTestText.Text.Length;
-
-            if (trimmedTypingTest != textSoFar && isLengthZero)
+            if (typingTest.Text != textSoFar && isLengthZero)
             {
                 typingTest.Foreground = Brushes.Red;
             }
@@ -99,9 +98,7 @@ namespace Tying_test
 
         private void AllowKeyPress(object sender, KeyEventArgs e)
         {
-            string trimmedTypingTest = string.Join("\n", typingTest.Text.Split('\n').Select(s => s.Trim()));
-
-            if (trimmedTypingTest.Length == typingTestText.Text.Length && e.Key != Key.Back)
+            if (typingTest.Text.Length >= typingTestText.Text.Length && e.Key != Key.Back)
             {
                 e.Handled = true;
             }
