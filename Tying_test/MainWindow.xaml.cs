@@ -56,7 +56,7 @@ namespace Tying_test
                 btnGenerateTypingTest.Visibility = Visibility.Collapsed;
                 btnStopWritingTest.Visibility = Visibility.Visible;
                 typingTest.Focus();
-                stopwatch.Start();
+                stopwatch.Restart();
             }
         }
 
@@ -67,16 +67,27 @@ namespace Tying_test
                 return;
             }
 
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                if (e.Key == Key.V)
+                {
+                    btnStopWritingTest.Content = "hi";
+
+                }
+            }
+
             string textSoFar = "";
             var isLengthZero = typingTest.Text.Length > 0;
 
             if (typingTest.Text == typingTestText.Text)
             {
                 stopwatch.Stop();
+                int lengthOfText = typingTest.Text.Length;
                 TimeSpan ts = stopwatch.Elapsed;
-                string elapsedTime = String.Format("{00}", ts.Seconds);
-                MessageBox.Show($"You were typing for: {elapsedTime} seconds");
-                stopwatch.Restart();
+                string elapsedTime = String.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
+                string elapsedTimeInSeconds = String.Format("{00}", ts.Seconds);
+                double wpm = Math.Round(((lengthOfText / 5) / (double.Parse(elapsedTimeInSeconds) / 60)), 2);
+                MessageBox.Show($"Your WPM: {wpm}\nYou were typing for: {elapsedTime}");
                 StopTypingTest(sender, e);
                 return;
             }
@@ -102,14 +113,9 @@ namespace Tying_test
             {
                 e.Handled = true;
             }
-            else if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {
-                if (e.Key == Key.V)
-                {
-                    e.Handled = true;
-                    btnGenerateTypingTest.Content = "hi";
-
-                }
+                e.Handled = true;
             }
         }
 
@@ -124,6 +130,15 @@ namespace Tying_test
             typingTest.Visibility = Visibility.Collapsed;
             btnGenerateTypingTest.Visibility = Visibility.Visible;
             btnStopWritingTest.Visibility = Visibility.Collapsed;
+        }
+
+        private void CheckIfAllowed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.V && (Keyboard.Modifiers & ModifierKeys.Control) ==
+      ModifierKeys.Control)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
